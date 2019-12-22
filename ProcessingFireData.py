@@ -1,7 +1,6 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[3]:
+'''
+Converting inexact addresses to latitude and longitude coordinates
+'''
 
 
 import numpy as np
@@ -10,20 +9,12 @@ from geopy.geocoders import GoogleV3
 import pygeoj
 
 
-# In[ ]:
-
-
+#Load incidents data
 jun_dec18 = pd.read_csv("May23-Dec-2018-Fire.csv")
 
 
-# In[6]:
-
-
+#Create a api key with Google
 geolocator = GoogleV3(api_key = "AIzaSyBhyJESOr7d1aQxZN44es3t8XMLWdwUw3o")
-
-
-# In[10]:
-
 
 lat = []
 lng = []
@@ -37,21 +28,14 @@ for point in jun_dec18["Street"]:
 points = pd.DataFrame({"lat": lat, "lng": lng})
 
 
-# In[11]:
-
-
+#Load coordinates to a csv file for plottign
 points.to_csv("Jun_Dec18FireIncients1.csv")
 
 
-# # Now we create an intensity map
-
-# In[12]:
-
+# Now we create an intensity map by counting how many incidents fall within each grid
 
 f = pygeoj.load("grids_w_zoneNum.json")
 
-
-# In[14]:
 
 
 jan_dict = {grid : 0 for grid in range(1187)}
@@ -64,14 +48,12 @@ for i in range(len(f)):
             jan_dict[i] += 1
 
 
-# In[20]:
-
+# Load intensity map into csv file for plotting
 
 jd18 = pd.DataFrame({"Intensity": [i for i in jan_dict.values()]})
 jd18.to_csv("intensity_JunDec18.csv")
 
 
-# In[ ]:
 
 
 
