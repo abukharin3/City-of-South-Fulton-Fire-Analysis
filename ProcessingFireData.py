@@ -14,7 +14,7 @@ jun_dec18 = pd.read_csv("May23-Dec-2018-Fire.csv")
 
 
 #Create a api key with Google
-geolocator = GoogleV3(api_key = "AIzaSyBhyJESOr7d1aQxZN44es3t8XMLWdwUw3o")
+geolocator = GoogleV3(api_key = "your_key")
 
 lat = []
 lng = []
